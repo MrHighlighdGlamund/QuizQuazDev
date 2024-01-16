@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>QuizQuaz</title>
+        <style>
+
+body {
+
+background-color: #ffcccc;
+
+font-family: 'Comic Sans MS', cursive, sans-serif;
+
+}
+
+
+#quizmaster {
+
+text-align: center;
+
+font-size: 2rem;
+
+color: #333;
+
+margin-top: 50px;
+
+}
+
+
+#questionnumber {
+
+text-align: center;
+
+font-size: 1.5rem;
+
+color: #333;
+
+margin-top: 20px;
+
+}
+
+
+#question {
+
+text-align: center;
+
+font-size: 3rem;
+
+color: #333;
+
+margin-top: 30px;
+
+}
+
+
+.button-row {
+
+display: flex;
+
+justify-content: center;
+
+margin-top: 30px;
+
+}
+
+
+#button1, #button2 {
+
+background-color: #ff9999;
+
+border: none;
+
+color: #333;
+
+padding: 15px 32px;
+
+text-align: center;
+
+text-decoration: none;
+
+display: inline-block;
+
+font-size: 1.2rem;
+
+margin: 10px;
+
+border-radius: 12px;
+
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+cursor: pointer;
+
+}
+
+
+#button3, #button4 {
+
+    background-color: #ff9999;
+
+border: none;
+
+color: #333;
+
+padding: 15px 32px;
+
+text-align: center;
+
+text-decoration: none;
+
+display: inline-block;
+
+font-size: 1.2rem;
+
+margin: 10px;
+
+border-radius: 12px;
+
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+cursor: pointer;
+
+}
+
+
+#score {
+
+text-align: center;
+
+font-size: 1.2rem;
+
+color: #333;
+
+margin-top: 50px;
+
+}
+            
+
+            
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+                var QuizmasterTextFlield;               
+                var QuestionnumberTextField ;
+                var QuestionTextField;;                              
+                var Button1;
+                var Button2;
+                var Button3;
+                var Button4;
+                var ScoreTextField;
+                var questioncount = 0;
+                var Score = 0;
+                const url = window.location.href;
+
+            document.addEventListener('DOMContentLoaded', function() {
+                
+
+                QuizmasterTextFlield = document.querySelector('#quizmaster');             
+                QuestionnumberTextField = document.querySelector('#questionnumber');
+                QuestionTextField = document.querySelector('#question');
+                Button1 = document.querySelector('#button1');
+                Button2 = document.querySelector('#button2');
+                Button3 = document.querySelector('#button3');
+                Button4 = document.querySelector('#button4');
+                ScoreTextField = document.querySelector('#score');
+                $.ajax({
+                    type: "GET",
+                    url: `${url}/data`,
+
+                   
+                     
+                    success: function(response) { // Fix the typo here
+                        Quizmaster = response.quizmaster
+                        Questions = response.questions
+                        Answers = response.answers
+                        Correctanswer = response.correctanswer
+
+                        SetupQuiz()                                           
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                });
+
+            });
+
+
+            function SetupQuiz() {
+
+                    QuizmasterTextFlield.innerHTML = Quizmaster;
+                    QuestionnumberTextField.innerHTML = questioncount+1 + "/" + Questions.length;
+                    QuestionTextField.innerHTML = Questions[questioncount];
+                    Button1.innerHTML = Answers[questioncount][0];
+                    Button2.innerHTML = Answers[questioncount][1];
+                    Button3.innerHTML = Answers[questioncount][2];
+                    Button4.innerHTML = Answers[questioncount][3];
+                    ScoreTextField.innerHTML = "Score: " + Score + "/" + Questions.length;
+                    }
+
+
+
+
+            function AnswerCheck(Answer) {
+
+                if (Answer == Correctanswer[questioncount]) {
+                    Score = Score + 1;
+                }
+                if (questioncount == Questions.length-1) {
+                    QuizmasterTextFlield.innerHTML = "Quiz Finished";
+                    QuestionnumberTextField.innerHTML = "Quiz Finished";
+                    QuestionTextField.innerHTML = "Quiz Finished";
+                    Button1.innerHTML = "";
+                    Button2.innerHTML = "";
+                    Button3.innerHTML = "";
+                    Button4.innerHTML = "";
+                    ScoreTextField.innerHTML = "Score: " + Score + "/" + Questions.length;
+                    return;
+                }
+
+                questioncount = questioncount + 1;  
+                QuestionnumberTextField.innerHTML = questioncount+1 + "/" + Questions.length;
+                QuestionTextField.innerHTML = Questions[questioncount];
+                Button1.innerHTML = Answers[questioncount][0];
+                Button2.innerHTML = Answers[questioncount][1];
+                Button3.innerHTML = Answers[questioncount][2];
+                Button4.innerHTML = Answers[questioncount][3];
+                ScoreTextField.innerHTML = "Score: " + Score + "/" + Questions.length;
+                
+                
+            }
+
+            
+            
+
+
+        </script>
+    </head>
+    <body>
+
+
+    <script>
+
+        
+        
+    </script>
+
+    
+
+
+    <h1 id="quizmaster">"{{Questions.0.Answer2}}"</h1>
+
+    <h1 id="questionnumber">""</h1>
+
+    
+    <h1 id="question">""</h1>
+
+
+    <div class="button-row">
+
+        <button onclick="AnswerCheck(0)" id="button1" type="button" >""</button>
+      
+        <button onclick="AnswerCheck(1)" id="button2" type="button" >""</button>
+      
+      </div>
+      
+      
+      <div class="button-row">
+      
+        <button onclick="AnswerCheck(2)" id="button3" type="button" >""</button>
+      
+        <button onclick="AnswerCheck(3)" id="button4" type="button" >""</button>
+      
+      </div>
+    <div id="score">""</div>
+
+
+
+
+
+</body>
+</html>
+
+

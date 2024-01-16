@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nothing Here</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-top: 0;
+    }
+
+    .animated-box {
+      width: 100px;
+      height: 100px;
+      background-color: #d1d1d1;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0% {
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        top: 60%;
+        transform: translate(-50%, -60%) scale(1.2);
+      }
+      100% {
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-box"></div>
+  <h1>Nothing Here</h1>
+  <p>It seems like the page you're looking for has disappeared into thin air. Let's go <a href="/">back to the homepage</a> and find something more exciting!</p>
+</body>
+</html>
